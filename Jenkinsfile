@@ -36,7 +36,10 @@ pipeline {
         // If Maven was able to run the tests, even if some of the test
         // failed, record the test results and archive the jar file.
         success {
-            httpRequest url: "https://api.flock.com/hooks/sendMessage/d66ae8e5-24ae-4d15-bc82-182ef7e46982", contentType: 'APPLICATION_JSON', httpMode: 'POST'
+            def msg = """
+            {"text": "test"}
+            """
+            httpRequest url: "https://api.flock.com/hooks/sendMessage/d66ae8e5-24ae-4d15-bc82-182ef7e46982", contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: msg
         }
         failure {
             echo "Failure! Duh!"
