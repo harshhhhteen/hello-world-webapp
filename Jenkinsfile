@@ -31,22 +31,12 @@ pipeline {
                 }
             }
         }
-        stage('flock') {
-            steps {
-                script {
-                    def response = httpRequest 'http://localhost:80/jenkins/api/json?pretty=true'
-                    println("Status: "+response.status)
-                    println("Content: "+response.content)
-        
-                }
-            }
-        }
     }
     post {
         // If Maven was able to run the tests, even if some of the test
         // failed, record the test results and archive the jar file.
         success {
-            echo "Success"
+            echo $GIT_COMMIT
         }
         failure {
             echo "Failure! Duh!"
