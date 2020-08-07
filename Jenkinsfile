@@ -21,11 +21,11 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(
-                        credentialsId: 'c01a453f-fe69-47d4-ad63-81dfaa273d7c',
+                        credentialsId: '9cc7a615-f974-4fab-9f48-1e585b7358cb',
                         toolName: 'docker') {
                         
                         // Build and Push
-                        def echoServerImage = docker.build("harshhhhteen/hello-world-webapp");
+                        def echoServerImage = docker.build("harshhhhteen/hello-world-webapp:latest");
                         echoServerImage.push();
                     }
                 }
