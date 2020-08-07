@@ -38,13 +38,18 @@ pipeline {
         success {
             script {
             def msg = """
-            {"text": ${GIT_COMMIT}}
+            {"text": "Project Name: hello-world-webapp\nBuild Commit: ${GIT_COMMIT}\nBuild Status: Success"}
             """;
             httpRequest url: "https://api.flock.com/hooks/sendMessage/d66ae8e5-24ae-4d15-bc82-182ef7e46982", contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: msg
             }
         }
         failure {
-            echo "Failure! Duh!"
+            script {
+            def msg = """
+            {"text": "Project Name: hello-world-webapp\nBuild Commit: ${GIT_COMMIT}\nBuild Status: Failure"}
+            """;
+            httpRequest url: "https://api.flock.com/hooks/sendMessage/d66ae8e5-24ae-4d15-bc82-182ef7e46982", contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: msg
+            }
         }
     }
 }
