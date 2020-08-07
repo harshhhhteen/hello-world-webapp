@@ -36,7 +36,7 @@ pipeline {
         // If Maven was able to run the tests, even if some of the test
         // failed, record the test results and archive the jar file.
         success {
-            echo GIT_COMMIT
+            curl -X POST https://api.flock.com/hooks/sendMessage/d66ae8e5-24ae-4d15-bc82-182ef7e46982 -H "Content-Type: application/json" -d '{"text": "test"}'
         }
         failure {
             echo "Failure! Duh!"
